@@ -29,7 +29,6 @@ An intelligent Android application that delivers customized quizzes based on use
 ## 🛠️ Technical Stack
 
 **Core Components:**
-- MVVM Architecture
 - SharedPreferences for local storage
 - Volley for network requests
 - Gson for JSON parsing
