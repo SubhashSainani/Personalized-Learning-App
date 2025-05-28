@@ -61,6 +61,10 @@ An intelligent Android application that delivers customized quizzes based on use
 |---------|---------|---------------|
 | <img src="profile.png" width="200"> | <img src="history.png" width="200"> | <img src="payment-plans.png" width="200"> |
 
+| Share Profile | Checkout Payment |
+|---------|---------|
+| <img src="share-profile.png" width="200"> | <img src="complete-purchase.png" width="200"> |
+
 ## 🛠️ Technical Architecture
 
 ### **Backend Infrastructure**
