@@ -59,7 +59,7 @@ An intelligent Android application that delivers customized quizzes based on use
 
 | Profile | History | Upgrade Plans |
 |---------|---------|---------------|
-| <img src="profile-screen.png" width="200"> | <img src="history-screen.png" width="200"> | <img src="upgrade-screen.png" width="200"> |
+| <img src="profile.png" width="200"> | <img src="history.png" width="200"> | <img src="payment-plans.png" width="200"> |
 
 ## 🛠️ Technical Architecture
 
@@ -111,7 +111,7 @@ GET  /test                      - API health check
 ### **Installation**
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/personalized-learning-app.git
+   git clone https://github.com/SubhashSainani/personalized-learning-app.git
    cd personalized-learning-app
    ```
 
@@ -157,7 +157,6 @@ GET  /test                      - API health check
 
 ### **Social Integration**
 - Multi-platform sharing capabilities
-- QR code generation for profile sharing
 - Performance broadcasting features
 - Copy-to-clipboard functionality
 
@@ -175,13 +174,6 @@ GET  /test                      - API health check
 - Conversational AI tutoring system
 - Predictive analytics for learning outcomes
 
-## 📊 Performance Metrics
-
-- **Response Time**: <2 seconds for quiz generation
-- **Accuracy**: 95%+ quiz content quality
-- **User Engagement**: Comprehensive analytics tracking
-- **Scalability**: Designed for 1000+ concurrent users
-
 ## 🔒 Security & Privacy
 
 - Secure user authentication system
@@ -198,22 +190,3 @@ GET  /test                      - API health check
 - [ ] Cross-platform synchronization
 - [ ] Gamification elements
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Support
-
-- **Email**: support@personalizedlearning.com
-- **Documentation**: [Wiki](https://github.com/yourusername/personalized-learning-app/wiki)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/personalized-learning-app/issues)
-
----
-
-<div align="center">
-  <strong>Built with ❤️ for personalized education</strong>
-</div>
