@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- EditText style -->
     <style name="OutlinedEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -11,4 +13,75 @@
         <item name="android:textColorHint">#666666</item>
         <item name="android:layout_marginTop">12dp</item>
     </style>
+
+    <!-- App Theme -->
+    <style name="Theme.PersonalizedLearning" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/blue_dark</item>
+        <item name="colorPrimaryVariant">@color/blue_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/green</item>
+        <item name="colorSecondaryVariant">@color/teal</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <item name="android:statusBarColor">@color/blue_dark</item>
+        <item name="android:windowBackground">@drawable/bg_gradient</item>
+    </style>
+
+    <!-- Card style -->
+    <style name="CardStyle">
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="android:layout_margin">@dimen/margin_medium</item>
+    </style>
+
+    <!-- Base button style -->
+    <style name="ButtonStyle">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+    </style>
+
+    <!-- Button variations -->
+    <style name="ButtonStyle.Primary" parent="ButtonStyle">
+        <item name="android:background">@drawable/rounded_button</item>
+    </style>
+
+    <style name="ButtonStyle.Success" parent="ButtonStyle">
+        <item name="android:background">@drawable/rounded_button_green</item>
+    </style>
+
+    <style name="ButtonStyle.Danger" parent="ButtonStyle">
+        <item name="android:background">@drawable/rounded_button_red</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <!-- Text styles -->
+    <style name="TextStyle.Title">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextStyle.Subtitle">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextStyle.Body">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextStyle.Caption">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColor">@color/dark_gray</item>
+    </style>
+
 </resources>

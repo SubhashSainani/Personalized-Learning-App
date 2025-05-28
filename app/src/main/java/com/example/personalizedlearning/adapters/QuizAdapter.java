@@ -1,6 +1,7 @@
 package com.example.personalizedlearning.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuestionViewHolder> {
+    private static final String TAG = "QuizAdapter";
     private Context context;
     private List<Question> questions;
     private List<String> userAnswers;
@@ -62,13 +64,16 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuestionViewHo
 
         // Single click handler for the entire header
         holder.questionHeader.setOnClickListener(v -> {
-            if (expandedStates.get(position)) {
+            int currentPosition = holder.getAdapterPosition();
+            if (currentPosition == RecyclerView.NO_POSITION) return;
+
+            if (expandedStates.get(currentPosition)) {
                 // Collapse
                 animateCollapse(holder.rgOptions);
                 rotateArrow(holder.iv_question_status, false);
-                expandedStates.set(position, false);
-            } else if (canExpand(position)) {
-                if (lastExpandedPosition != position) {
+                expandedStates.set(currentPosition, false);
+            } else if (canExpand(currentPosition)) {
+                if (lastExpandedPosition != currentPosition) {
                     // Collapse previous
                     expandedStates.set(lastExpandedPosition, false);
                     notifyItemChanged(lastExpandedPosition);
@@ -76,8 +81,8 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuestionViewHo
                 // Expand current
                 animateExpand(holder.rgOptions);
                 rotateArrow(holder.iv_question_status, true);
-                expandedStates.set(position, true);
-                lastExpandedPosition = position;
+                expandedStates.set(currentPosition, true);
+                lastExpandedPosition = currentPosition;
             } else {
                 Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
                 holder.questionHeader.startAnimation(shake);
@@ -97,33 +102,49 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuestionViewHo
             holder.rbOption4.setVisibility(View.GONE);
         }
 
-        // Set checked state
+        // Set checked state based on stored answer
         holder.rgOptions.setOnCheckedChangeListener(null);
         String selectedAnswer = userAnswers.get(position);
-        if (selectedAnswer.equals(holder.rbOption1.getText().toString())) {
-            holder.rbOption1.setChecked(true);
-        } else if (selectedAnswer.equals(holder.rbOption2.getText().toString())) {
-            holder.rbOption2.setChecked(true);
-        } else if (selectedAnswer.equals(holder.rbOption3.getText().toString())) {
-            holder.rbOption3.setChecked(true);
-        } else if (selectedAnswer.equals(holder.rbOption4.getText().toString())) {
-            holder.rbOption4.setChecked(true);
-        } else {
-            holder.rgOptions.clearCheck();
+
+        // Clear all selections first
+        holder.rgOptions.clearCheck();
+
+        // Set the correct selection
+        if (!selectedAnswer.isEmpty()) {
+            if (selectedAnswer.equals(options.get(0))) {
+                holder.rbOption1.setChecked(true);
+            } else if (selectedAnswer.equals(options.get(1))) {
+                holder.rbOption2.setChecked(true);
+            } else if (selectedAnswer.equals(options.get(2))) {
+                holder.rbOption3.setChecked(true);
+            } else if (options.size() > 3 && selectedAnswer.equals(options.get(3))) {
+                holder.rbOption4.setChecked(true);
+            }
         }
 
         // Handle answer selection
         holder.rgOptions.setOnCheckedChangeListener((group, checkedId) -> {
             int pos = holder.getAdapterPosition();
+            if (pos == RecyclerView.NO_POSITION) return;
+
+            String selectedOption = "";
+
             if (checkedId == holder.rbOption1.getId()) {
-                userAnswers.set(pos, holder.rbOption1.getText().toString());
+                selectedOption = holder.rbOption1.getText().toString();
             } else if (checkedId == holder.rbOption2.getId()) {
-                userAnswers.set(pos, holder.rbOption2.getText().toString());
+                selectedOption = holder.rbOption2.getText().toString();
             } else if (checkedId == holder.rbOption3.getId()) {
-                userAnswers.set(pos, holder.rbOption3.getText().toString());
+                selectedOption = holder.rbOption3.getText().toString();
             } else if (checkedId == holder.rbOption4.getId()) {
-                userAnswers.set(pos, holder.rbOption4.getText().toString());
+                selectedOption = holder.rbOption4.getText().toString();
             }
+
+            // Store the selected option text (not the letter)
+            userAnswers.set(pos, selectedOption);
+
+            Log.d(TAG, "Question " + (pos + 1) + " answered:");
+            Log.d(TAG, "  Selected: '" + selectedOption + "'");
+            Log.d(TAG, "  Correct Answer: '" + questions.get(pos).getCorrectAnswer() + "'");
 
             // Auto-expand next question if available
             if (pos < questions.size() - 1 && !expandedStates.get(pos + 1)) {
@@ -132,12 +153,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuestionViewHo
             }
         });
 
-        // Entry animation
-        if (position > lastExpandedPosition) {
+        // Entry animation - Fix for lastExpandedPosition logic
+        if (position == 0 || expandedStates.get(position)) {
             Animation animation = AnimationUtils.loadAnimation(context,
                     position % 2 == 0 ? R.anim.slide_in_right : R.anim.slide_in_left);
             holder.itemView.startAnimation(animation);
-            lastExpandedPosition = position;
         }
     }
 

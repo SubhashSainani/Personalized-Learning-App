@@ -63,7 +63,9 @@ public class HomeActivity extends AppCompatActivity {
 
         ivProfile.setOnClickListener(v -> {
             v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in));
-            Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         });
     }
 
@@ -156,5 +158,15 @@ public class HomeActivity extends AppCompatActivity {
     private void showNoTasksAvailable() {
         tvTaskStatus.setText("You have 0 tasks due");
         cvTask.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh user data when returning to home
+        currentUser = sharedPrefManager.getUser();
+        if (currentUser != null) {
+            animateWelcomeMessage();
+        }
     }
 }
